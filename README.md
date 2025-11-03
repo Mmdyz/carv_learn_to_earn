@@ -41,14 +41,77 @@ carv_l2e provides a **simple, AI-assisted portal** that connects users with ques
 
 ---
 
-## 🧠 Architecture
+## 🧱 Tech Stack
+- **Next.js 16** — Frontend framework  
+- **TailwindCSS** — Styling  
+- **Solana Web3.js** — Blockchain interactions  
+- **CARV SVM RPC** — On-chain connectivity  
+- **Axios** — API communication  
+- **Vercel** — Deployment
 
-```mermaid
-graph TD
-A[User] -->|Login with CARV ID| B[Frontend (Next.js)]
-B -->|Requests Quest List| C[Backend (Node.js)]
-C -->|Fetches from DB| D[Supabase / JSON Store]
-B -->|AI Suggestions| E[Agent Endpoint (OpenAI or Local LLM)]
-B -->|Submit Quest Completion| F[CARV SVM Smart Contract]
-F -->|Record Proof| G[On-chain QuestLog]
+---
+
+## ⚙️ Setup & Installation
+
+### 1️⃣ Clone the repo
+```bash
+git clone https://github.com/Mmdyz/carv-learn-to-earn-solana.git
+cd carv-learn-to-earn-solana
+
+###2️⃣ Install dependencies
+npm install
+
+3️⃣ Configure environment variables
+
+Create a .env.local file:
+
+NEXT_PUBLIC_RPC_URL=https://rpc.carv.testnet.soo.network/rpc/carv-McPrlbfMcW0ggpkvr07Tjs2YfviwpHaI
+NEXT_PUBLIC_NETWORK=testnet
+NEXT_PUBLIC_APP_NAME=CARV-Learn-To-Earn
+
+4️⃣ Run the app
+npm run dev
+
+
+Visit: http://localhost:3000
+
+☁️ Deployment
+Deploy to Vercel
+
+Push your repo to GitHub
+
+Go to vercel.com/new
+
+Import your repo
+
+Add your .env.local variables
+
+Click Deploy
+
+🧩 Features
+
+Learning Quests — Complete tasks, log progress, and learn CARV SVM.
+
+Leaderboard — Displays top builders by transaction count.
+
+Swap Widget — Token swap interface (CARV ↔ USDT).
+
+Mentor Chat — AI assistant for CARV ecosystem guidance.
+
+Wallet Integration — Solana wallet connect via Phantom or Solflare.
+
+🛠 Future Enhancements
+
+On-chain quest verification
+
+Dynamic leaderboard from CARV SVM explorer
+
+Integrated reward claim flow
+
+CARV AgentKit-powered learning AI
+
+📜 License
+
+MIT License © 2025 CARV Learn-to-Earn Team
+
 
