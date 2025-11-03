@@ -1,6 +1,6 @@
 # 🧭 carv_learn_to_earn — Your AI Guide to On-Chain Adventures
 
-**carv_learn_to_earn** is an **AI-powered quest explorer** built on the **CARV SVM Testnet**.  
+A decentralized Learn-to-Earn dApp built on the **CARV SVM testnet**, combining Web3 onboarding, quests, and DeFi features into one seamless experience. 
 It helps users **discover, complete, and record Web3 tasks** — all linked to their **CARV ID** via **CARV AgentKit**.  
 This project is built for the [CARV Community Hackathon](https://docs.carv.io/hackathon).
 
