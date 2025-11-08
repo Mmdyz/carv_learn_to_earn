@@ -1,0 +1,9 @@
+[provider]
+cluster = "https://rpc.testnet.carv.io/rpc"
+wallet = "~/.config/solana/id.json"
+
+[programs.localnet]
+carv_learn_to_earn = "2JgcovWc7EeE9QJLws5zLrWNAXCQzNhYDsiMVRWdD3RM"
+
+[scripts]
+test = "anchor test"

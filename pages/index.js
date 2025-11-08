@@ -8,8 +8,13 @@ import { connection, getAccountData } from "../lib/connection";
 import { logQuestCompletion } from "../lib/contract";
 import SwapWidget from "../components/SwapWidget";
 import { motion, AnimatePresence } from "framer-motion";
-
+import DappsWidget from "../components/DappsWidget";
+import ActivityTracker from "../components/ActivityTracker";
+import CommunityHub from "../components/CommunityHub";
 import toast from "react-hot-toast";
+import Questboard from "../components/Questboard";
+import Dashboard from "./dashboard";
+import ThemeToggle from "../components/ThemeToggle";
 
 import LeaderboardWidget from "../components/LeaderboardWidget"; // ⬅️ Add this import
 import dynamic from "next/dynamic";
@@ -96,13 +101,30 @@ export default function Home() {
 
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-gray-100 p-6">
+    <div
+    className="min-h-screen text-gray-100 p-6 bg-cover bg-center"
+    style={{
+      backgroundImage: "url('/images/darkmode.jpg')",
+    }}
+  >
       {/* Header */}
       <header className="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
-       <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
-          🚀 CARV Learn-to-Earn <span className="text-sm text-gray-400">(SVM Chain)</span>
+      <div className="flex items-baseline space-x-3">
+        <img
+          src="/images/logo.png"
+          alt="CARV NEXUS Logo"
+          className="w-100 h-20 object-contain "
+        />
+      
+       <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent ">
+        <span className="text-sm text-gray-400"></span>
         </h1>
-        <WalletMultiButton />
+      </div>
+        <div className="flex items-center gap-3">
+  <ThemeToggle />
+  <WalletMultiButton />
+</div>
+
       </header>
 
       <main className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -110,6 +132,19 @@ export default function Home() {
         <section className="lg:col-span-2 bg-[#0b0f19] border border-gray-800 rounded-2xl p-5 shadow-md">
          
           <div className="flex space-x-2 mb-6">
+
+           <button
+              onClick={() => setActiveTab("dashboard")}
+              className={`px-4 py-2 rounded-lg font-medium ${
+               activeTab === "dashboard"
+              ? "bg-cyan-600 text-white"
+              : "bg-[#0b0f19] text-gray-400 hover:text-white"
+           }`}
+  >   
+            Dashboard
+           </button>
+           
+
            <button
               onClick={() => setActiveTab("quests")}
               className={`px-4 py-2 rounded-lg font-medium ${
@@ -139,13 +174,46 @@ export default function Home() {
           }`}
   >
              Leaderboard
-           </button>  
+           </button> 
+           <button
+          onClick={() => setActiveTab("dapps")}
+           className={`px-4 py-2 rounded-lg font-medium ${
+           activeTab === "dapps"
+            ? "bg-cyan-600 text-white"
+           : "bg-[#0b0f19] text-gray-400 hover:text-white"
+          }`}
+  >
+              Dapps
+           </button> 
+           <button
+          onClick={() => setActiveTab("activity")}
+           className={`px-4 py-2 rounded-lg font-medium ${
+           activeTab === "activity"
+            ? "bg-cyan-600 text-white"
+           : "bg-[#0b0f19] text-gray-400 hover:text-white"
+          }`}
+  >
+              Activity
+           </button> 
+           <button
+          onClick={() => setActiveTab("community")}
+           className={`px-4 py-2 rounded-lg font-medium ${
+           activeTab === "community"
+            ? "bg-cyan-600 text-white"
+           : "bg-[#0b0f19] text-gray-400 hover:text-white"
+          }`}
+  >
+              Community
+           </button> 
+
+
       </div>
+      
 
            {activeTab === "quests" && (
     <>
       <h2 className="text-xl font-semibold text-cyan-400 mb-4">
-        Learning Quests
+        🎮 Gamified Questboard
       </h2>
 
       {quests.length > 0 ? (
@@ -157,6 +225,8 @@ export default function Home() {
       )}
     </>
   )}
+{activeTab === "dashboard" && <Dashboard walletAdapter={wallet} />}
+  {activeTab === "questboard" && <Questboard />}
 
   {activeTab === "swap" && (
     <SwapWidget
@@ -169,6 +239,10 @@ export default function Home() {
   )}
 
   {activeTab === "leaderboard" && <LeaderboardWidget />}
+  {activeTab === "dapps" && <DappsWidget />}
+  {activeTab === "activity" && <ActivityTracker />}
+  {activeTab === "community" && <CommunityHub />}
+
         </section>
 
         {/* Sidebar */}

@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..");
 const STORE = path.join(PROJECT_ROOT, "data_leaderboard.json");
 
-const RPC = "https://rpc.carv.testnet.soo.network/rpc/carv-McPrlbfMcW0ggpkvr07Tjs2YfviwpHaI";
+const RPC = "https://rpc.testnet.carv.io/rpc"; // Updated RPC URL
 
 const MEMO_PROGRAM_ID = new PublicKey("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr");
 

@@ -15,6 +15,7 @@ export default function QuestCard({ quest, onComplete }) {
   if (!quest) return null;
 
   return (
+    
     <div className="bg-[#0b0f19] border border-gray-800 rounded-2xl shadow-md p-5 mb-4 hover:border-cyan-600 transition">
       <div className="flex justify-between items-center">
         <div>
@@ -22,9 +23,10 @@ export default function QuestCard({ quest, onComplete }) {
             {quest.title}
           </h3>
           <p className="text-sm text-gray-300 leading-relaxed">
-            {quest.description}
+            {quest.description} <span className="text-xs text-gray-500">🏆 {quest.xp} XP • {quest.difficulty}</span>
+
           </p>
-        </div>
+                     </div>
 
         <button
           onClick={handleComplete}
