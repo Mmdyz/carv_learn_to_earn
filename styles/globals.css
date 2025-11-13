@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === GLOBAL RESET ==================================== */
+html, body, #__next {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto;
+  overflow-x: hidden;
+  color: #e5e7eb; /* gray-200 */
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* === DARK-MODE BACKGROUND ============================= */
+body {
+  background-image: url('/images/darkmode.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* === HEADER =========================================== */
+header {
+  background-image: url('/images/bgHeader.png');
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  background-blend-mode: overlay;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* === PANELS =========================================== */
+.bg-panel {
+  background: rgba(11, 15, 25, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(12px);
+  transition: background 0.4s ease, border 0.4s ease;
+}
+
+/* === LOGO GLOW ======================================== */
+header img {
+  filter: drop-shadow(0 0 6px #00e0ff);
+  transition: filter 0.4s ease;
+}
+
+/* === TEXT EFFECTS ===================================== */
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+/* === BUTTONS ========================================== */
+button {
+  transition: all 0.2s ease-in-out;
+}
+button:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 6px #00e0ff);
+}
+
+/* === SCROLLBAR ======================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00e0ff, #4f46e5);
+  border-radius: 10px;
+}
+
+/* === LINKS ============================================ */
+a {
+  color: #00e0ff;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #4f46e5;
+}
+
+/* === BACKGROUND ANIMATION ============================= */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1), transparent 70%);
+  opacity: 0.25;
+  pointer-events: none;
+  animation: pulseGlow 6s ease-in-out infinite alternate;
+}
+@keyframes pulseGlow {
+  from { opacity: 0.15; }
+  to { opacity: 0.35; }
+}
+
+.badge-glow:hover {
+  filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.5));
+  transform: scale(1.03);
+  transition: all 0.3s ease-in-out;
+}
+.badge-animate {
+  animation: floatUp 3s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(0,255,255,0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(0,255,255,0.8));
+  }
+}
+
+.badge-animate {
+  animation: badgePulse 2.2s ease-in-out infinite;
+}
+@keyframes floatUp {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 230px;
+  background-color: rgba(15, 23, 42, 0.95);
+  color: #67e8f9;
+  text-align: center;
+  border-radius: 0.5rem;
+  padding: 8px;
+  position: absolute;
+  z-index: 10;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  border: 1px solid rgba(103, 232, 249, 0.3);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
