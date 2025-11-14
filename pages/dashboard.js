@@ -64,7 +64,21 @@ export default function Dashboard({ walletAdapter }) {
   };
 
   // Level calculation
-  const calculateLevel = (xp) => Math.floor(xp / 200) + 1;
+  const calculateLevel = (xp) => Math.floor(xp / 70) + 1;
+
+   // ======================================================
+  // ⭐ LEVEL TITLES
+  // ======================================================
+  const getLevelTitle = (level) => {
+    if (level >= 25) return "🜂 SVM Overlord";
+    if (level >= 20) return "⚡ Nexus Ascendant";
+    if (level >= 15) return "🛡 Guardian of CARV";
+    if (level >= 10) return "💠 Elite Web3 Pioneer";
+    if (level >= 7) return "🚀 CARV Chain Builder";
+    if (level >= 5)  return "🎯 Web3 Explorer";
+    if (level >= 2)  return "🔰 Apprentice";
+    return "🌱 Beginner";
+  };
 
   if (!walletAdapter?.publicKey)
     return (
@@ -98,9 +112,13 @@ export default function Dashboard({ walletAdapter }) {
           className="bg-panel border border-gray-800 rounded-2xl p-6 shadow-md"
         >
           <h2 className="text-cyan-300 mb-3 font-medium">📊 Activity</h2>
-          <p>On-chain Interactions: <span className="font-bold">{stats.totalTrades}</span></p>
+          <p>On-chain Interactions: <span className="font-bold text-blue-300">{stats.totalTrades}</span></p>
           <p>Quest XP: <span className="font-bold text-cyan-300">{questXP} XP</span></p>
           <p>Badge XP: <span className="font-bold text-blue-300">{calculateBadgeXP()} XP</span></p>
+
+           <p>Rank:<span className="text-md font-medium text-purple-300 mb-4">
+            {getLevelTitle(level)}</span>
+          </p>
         </motion.div>
 
         {/* === Level & XP === */}
@@ -112,6 +130,7 @@ export default function Dashboard({ walletAdapter }) {
         >
           <h2 className="text-cyan-300 mb-3 font-medium">⚡ Level & Progress</h2>
           <p className="text-lg font-semibold text-white">Level {level}</p>
+          
           <p className="text-sm text-gray-400 mb-2">{totalXP} XP</p>
 
           <div className="bg-gray-700 h-2 rounded-full overflow-hidden">
@@ -125,6 +144,9 @@ export default function Dashboard({ walletAdapter }) {
 
           <p className="text-xs text-gray-500 mt-1">
             Progress to Level {level + 1}
+          </p>
+          <p className="text-xs text-gray-500 mt-1 italic">
+            Includes badges XPs which are earned through on-chain interactions.
           </p>
         </motion.div>
       </div>
