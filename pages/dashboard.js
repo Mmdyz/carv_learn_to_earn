@@ -70,12 +70,12 @@ export default function Dashboard({ walletAdapter }) {
   // ⭐ LEVEL TITLES
   // ======================================================
   const getLevelTitle = (level) => {
-    if (level >= 15) return "🜂 SVM Overlord";
-    if (level >= 13) return "⚡ Nexus Ascendant";
-    if (level >= 10) return "💠 Elite Web3 Pioneer";
-    if (level >= 7) return "🚀 CARV Chain Builder";
-    if (level >= 5)  return "🎯 Web3 Explorer";
-    if (level >= 2)  return "🔰 Apprentice";
+    if (level >= 15) return " 🜂 SVM Overlord";
+    if (level >= 13) return " ⚡ Nexus Ascendant";
+    if (level >= 10) return " 💠 Elite Web3 Pioneer";
+    if (level >= 7) return  " 🚀 CARV Chain Builder";
+    if (level >= 5)  return " 🎯 Web3 Explorer";
+    if (level >= 2)  return " 🔰 Apprentice";
     return "🌱 Beginner";
   };
 
