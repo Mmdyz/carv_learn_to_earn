@@ -22,28 +22,27 @@ Feel free to check the community tab to get the latest updates. I'll be back soo
     return () => clearInterval(interval);
   }, [isThinking]);
 
+  // ⬇️ MAIN: Handle “Ask Elesha”
   const handleAsk = async () => {
     if (!prompt.trim()) return;
+
     setIsThinking(true);
     setReply("");
 
     try {
       const res = await onAsk(prompt);
-      if (res?.data?.reply) {
-        setReply(res.data.reply);
+
+      // 🔵 Groq API returns: { reply: "..." }
+      if (res?.reply) {
+        setReply(res.reply);
       } else {
-        setTimeout(() => {
-          setReply(fallbackReply);
-          setIsThinking(false);
-        }, 2000);
-        return;
-      }
-    } catch {
-      setTimeout(() => {
         setReply(fallbackReply);
-        setIsThinking(false);
-      }, 2000);
+      }
+    } catch (err) {
+      console.error("Elesha error:", err);
+      setReply(fallbackReply);
     } finally {
+      setIsThinking(false);
       setPrompt("");
     }
   };
@@ -69,6 +68,7 @@ Feel free to check the community tab to get the latest updates. I'll be back soo
 
       {/* Reply Box */}
       <div className="flex items-start gap-3 bg-[#101524] border border-gray-800 rounded-xl p-4 text-sm min-h-[80px] text-gray-300 transition-all duration-500">
+        
         {/* 🧠 Mentor Avatar */}
         <div
           className={`w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 shadow-lg ${
@@ -77,7 +77,7 @@ Feel free to check the community tab to get the latest updates. I'll be back soo
         >
           <img
             src="images/elyra.png"
-            alt="Elyra"
+            alt="Elesha"
             className="w-full h-full object-cover opacity-90"
           />
         </div>
