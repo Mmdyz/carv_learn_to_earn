@@ -1,21 +1,36 @@
-// pages/api/leaderboard.js
-import fs from "fs/promises";
-import path from "path";
+import { supabase } from "../../lib/supabase";
+import { getUserXP } from "../../lib/getUserXP";
 
 export default async function handler(req, res) {
-  const filePath = path.join(process.cwd(), "data_leaderboard.json");
-
   try {
-    const raw = await fs.readFile(filePath, "utf8");
-    const data = raw.trim() ? JSON.parse(raw) : { counts: {} }; // 🛠 Fallback if empty
+    // 1️⃣ Fetch all distinct users who completed quests
+    const { data, error } = await supabase
+      .from("quest_completions")
+      .select("user_address")
+      .neq("user_address", null);
 
-    const sorted = Object.entries(data.counts || {})
-      .sort((a, b) => b[1] - a[1])
-      .map(([address, count]) => ({ address, count }));
+    if (error) throw error;
+    if (!data.length) return res.status(200).json([]);
 
-    res.status(200).json(sorted);
+    // 2️⃣ Unique wallet addresses
+    const users = [...new Set(data.map((u) => u.user_address))];
+
+    // 3️⃣ Compute XP per user
+    const leaderboard = [];
+    for (let address of users) {
+      const xp = await getUserXP(address);
+      leaderboard.push({
+        wallet: address,
+        xp,
+      });
+    }
+
+    // 4️⃣ Sort by XP DESC
+    leaderboard.sort((a, b) => b.xp - a.xp);
+
+    return res.status(200).json(leaderboard);
   } catch (err) {
-    console.error("Leaderboard fetch error:", err);
-    res.status(200).json([]); // fallback empty
+    console.error("Leaderboard error:", err);
+    return res.status(500).json({ error: "Failed to load leaderboard" });
   }
 }
